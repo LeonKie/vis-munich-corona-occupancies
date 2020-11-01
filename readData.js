@@ -1,12 +1,12 @@
 
+const url = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/main/data"
+
 let getDaysArray = function(start, end) {
     for(var arr=[],dt=new Date(start); dt<=end; dt.setDate(dt.getDate()+1)){
         arr.push(new Date(dt));
     }
     return arr;
 }
-
-const url = "https:raw.githubusercontent.com/zepatrik/munich-corona-occupancies/main/data"
 
 function getPaths(location,startDate,endDate){
     const days=getDaysArray(startDate,endDate)
@@ -15,7 +15,9 @@ function getPaths(location,startDate,endDate){
 }
 
 export async function getData(){
-    const paths=getPaths("bwo",new Date("10-27-2020"),new Date())
+    const start = new Date(new Date("10-25-2020 10:00").toLocaleString("en-us", {timeZone: "Europe/Berlin"}))
+    const end = new Date(new Date())
+    const paths=getPaths("bwo",start,end)
     console.log(paths)
     const output = await Promise.all(paths.map(path => {
         return fetch(path)

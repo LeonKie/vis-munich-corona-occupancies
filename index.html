@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        #chartdiv {
-          width: 100%;
-          height: 500px;
+        canvas {
+                max-height: 90vh;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
         }
-        
         </style>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Munich Occupancy Visulisation</title>
-    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.7"></script>
 </head>
-<body>
+<body style="height:100vh">
+    <div>
+        <canvas id="Occ" width="400" height="200"></canvas>
+        <form>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date">
+            <input type="week" id="week" name="week">
+            <input type="month" id="month" name="month">
+        </form>
+
+    </div>
     <script  type="module" src="readData.js"></script>
     <script type="module" src="client.js"></script>
-    <div id="chartdiv"></div>
    
 </body>
 </html>
