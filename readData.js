@@ -14,10 +14,8 @@ function getPaths(location,startDate,endDate){
     return paths
 }
 
-export async function getData(){
-    const start = new Date(new Date("10-25-2020 10:00").toLocaleString("en-us", {timeZone: "Europe/Berlin"}))
-    const end = new Date(new Date())
-    const paths=getPaths("bwo",start,end)
+export async function getData(loc,start,end = new Date()){
+    const paths=getPaths(loc,start,end)
     console.log(paths)
     const output = await Promise.all(paths.map(path => {
         return fetch(path)

@@ -6,8 +6,10 @@ const canvas = document.getElementById('Occ').getContext("2d");
 chartIt()
 
 async function getformatedData(){
-
-    const datapoints=await getData()
+    const start = new Date(new Date("10-27-2020 10:00").toLocaleString("en-us", {timeZone: "Europe/Berlin"}))
+    const end = new Date()
+    const loc="s_dante"
+    const datapoints=await getData(loc,start,end)
 
     //format Data to correct object
     const data_percent=datapoints.map(elt=>{
