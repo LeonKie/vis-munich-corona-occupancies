@@ -3,30 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        canvas {
-                max-height: 90vh;
-                -moz-user-select: none;
-                -webkit-user-select: none;
-                -ms-user-select: none;
+        #bubblechart {
+            width: 100%;
+            height: 500px;
         }
-        </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.7"></script>
+
+
+    </style>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/lang/de_DE.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/geodata/germanyLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/fonts/notosans-sc.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+
 </head>
 <body style="height:100vh">
-    <div>
-        <canvas id="Occ" width="400" height="200"></canvas>
-        <form>
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date">
-            <input type="week" id="week" name="week">
-            <input type="month" id="month" name="month">
-        </form>
 
+    <div class="ui raised padded container">
+        <div class="ui container">
+            <hr style="height:10px; visibility:hidden;" />
+            <h1 class="ui center aligned header">
+                Munich Occupancies Graphically Visualized
+            </h1>
+        </div>
+        <h4 class="ui horizontal divider header">
+            <i class="map outline icon"></i>
+            Select Location
+        </h4>
+        <p>The chart shows the occupancies of different Locations in Munich. This is helpfull if you want to find a the best timeslot without having to wait. </p>
+        
+        <select class="ui fluid search selection dropdown" >
+            <i class="dropdown icon"></i>
+        </select>
+
+        <h4 class="ui horizontal divider header">
+            <i class="bar chart icon"></i>
+            Bubble Chart
+        </h4>
+
+        <div class="ui container">
+            <div class="ui segment">
+                <div class="ui left rail">
+                <div class="ui container">
+                    <div class="ui vertical text menu">
+                        <div class="header item">Importand Infos</div>
+                        <a class="item">
+                          API
+                        </a>
+                        <a class="item">
+                          Where did we get the data from?
+                        </a>
+                        <a>
+                        <img src="/images/avatar/leon.png" data-title="Leon Kie" data-content="Creator of the Visualization on this site" class="ui avatar image">
+                        <img src="/images/avatar/patrik.jpg" data-title="Patrik N" data-content="Creator of the API" class="ui avatar image">
+                        <br></br>
+                        </a>
+
+                        <a>
+                            <div class="ui fluid animated fade button" tabindex="0">
+                                <div class="visible content">
+                                    <i class="coffee icon"></i>
+                                </div>
+                                <div class="hidden content">
+                                    Buy us a Coffee
+                                </div>
+                            </div>
+
+                        </a>
+                      </div>
+                </div>
+                </div>
+                <div class="ui right rail">
+               
+                </div>
+    
+        
+
+
+        <div id="bubblechart"></div>
+        
+        <div class="ui centered grid ">
+        <div class="two wide column">
+            <div class="ui fluid animated button" tabindex="0">
+                <div class="visible content">Previous</div>
+                <div class="hidden content">
+                <i class="left arrow icon"></i>
+                </div>
+            </div>         
+        </div>
+
+        <div class="ui mini statistic">
+            <div class="value">
+              12
+            </div>
+            <div class="label">
+                calendar week
+            </div>
+          </div>
+
+        <div class="two wide column">
+        <div class="ui fluid animated button" tabindex="0">
+            <div class="visible content">Next</div>
+                <div class="hidden content">
+                <i class="right arrow icon"></i>
+                </div>
+        </div>
+        </div>
+        </div>
+
+        </div>
+        </div>
+
+        <h4 class="ui horizontal divider header">
+            <i class="bell outline icon"></i>
+            Now
+        </h4>
+        <div class="ui indicating progress">
+            <div class="bar"></div>
+            <div class="label">Current Occupancie</div>
+        </div>
     </div>
+
+    
+
     <script  type="module" src="readData.js"></script>
-    <script type="module" src="client.js"></script>
+    <script  type="module" src="bubblechart.js"></script>
    
 </body>
 </html>

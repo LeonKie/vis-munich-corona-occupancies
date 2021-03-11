@@ -1,4 +1,5 @@
 import {getData} from "./readData.js"
+import LineChart from 'metrics-graphics'
 
 const canvas = document.getElementById('Occ').getContext("2d");
 
@@ -6,9 +7,9 @@ const canvas = document.getElementById('Occ').getContext("2d");
 chartIt()
 
 async function getformatedData(){
-    const start = new Date(new Date("10-27-2020 10:00").toLocaleString("en-us", {timeZone: "Europe/Berlin"}))
-    const end = new Date()
-    const loc="s_dante"
+    const start = new Date(new Date("10-30-2020 10:00").toLocaleString("en-us", {timeZone: "Europe/Berlin"}))
+    const end =new Date(new Date("11-01-2020 10:00").toLocaleString("en-us", {timeZone: "Europe/Berlin"}))
+    const loc="b_ei"
     const datapoints=await getData(loc,start,end)
 
     //format Data to correct object
@@ -29,7 +30,7 @@ async function chartIt() {
     const [data_percent,data_queue] = await getformatedData();
     console.log(data_percent)
     console.log(data_queue)
-
+    
     const data = {
         //labels: [new Date("2015-3-15 13:3").toLocaleString(), new Date("2015-3-25 13:2").toLocaleString(), new Date("2015-4-25 14:12").toLocaleString()],
         datasets: [
@@ -107,3 +108,15 @@ async function chartIt() {
     });
     return chart  
 }
+
+
+
+new LineChart({
+  data, // some array of data objects
+  width: 600,
+  height: 200,
+  target: '#chart',
+  area: true,
+  xAccessor: 'date',
+  yAccessor: 'value'
+})
