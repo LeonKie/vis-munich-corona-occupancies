@@ -1,5 +1,5 @@
 
-const url = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/main/data"
+const url = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/location-index/data"
 
 let getDaysArray = function(start, end) {
     for(var arr=[],dt=new Date(start); dt<=end; dt.setDate(dt.getDate()+1)){
@@ -17,17 +17,17 @@ function getPaths(location,startDate,endDate){
 export async function getData(loc,start,end = new Date()){
     const paths=getPaths(loc,start,end)
     console.log(paths)
-    const output = await Promise.all(paths.map(path => {
+    const output = await Promise.all(paths.map(path => { 
         return fetch(path)
                 .then(res => res.json())
                 .then(data=> (data))
-        
+                .catch(()=> [] )
     }))
     const data= await output.reduce((acc,cur)=> {
         return acc.concat(cur)
     },[])
     
-    //console.log(data)
+    console.log(data)
     return data
 }
 
