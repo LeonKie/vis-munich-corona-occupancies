@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,25 +10,24 @@
             width: 100%;
             height: 500px;
         }
-
-
     </style>
-    
+
     <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/lang/de_DE.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/geodata/germanyLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/fonts/notosans-sc.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-    <script src="https://gist.githubusercontent.com/bl4ck5un/ed27db3d653011b32ee0877058abac7d/raw/d7c46a3880d94cbc3f344bb160620dbd1cb17f2b/responsive-semantic-ui.css"></script>
-    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
     <script
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
+        src="https://gist.githubusercontent.com/bl4ck5un/ed27db3d653011b32ee0877058abac7d/raw/d7c46a3880d94cbc3f344bb160620dbd1cb17f2b/responsive-semantic-ui.css">
+    </script>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="semantic/dist/semantic.min.js"></script>
 
 </head>
+
 <body style="height:100vh">
 
     <div class="ui raised padded container">
@@ -41,9 +41,10 @@
             <i class="map outline icon"></i>
             Select Location
         </h4>
-        <p>The chart shows the occupancies of different Locations in Munich. This is helpfull if you want to find a the best timeslot without having to wait. </p>
-        
-        <select class="ui fluid search selection dropdown" >
+        <p>The chart shows the occupancies of different Locations in Munich. This is helpfull if you want to find a the
+            best timeslot without having to wait. </p>
+
+        <select class="ui fluid search selection dropdown">
             <i class="dropdown icon"></i>
         </select>
 
@@ -55,75 +56,80 @@
         <div class="ui container">
             <div class="ui segment">
                 <div class="ui left rail computer only">
-                <div class="ui container">
-                    <div class="ui vertical text menu">
-                        <div class="header item">Importand Infos</div>
-                        <a class="item">
-                          API
-                        </a>
-                        <a class="item">
-                          Where did we get the data from?
-                        </a>
-                        <a>
-                        <img src="./images/avatar/leon.png" data-title="Leon Kie" data-content="Creator of the Visualization on this site" class="ui avatar image">
-                        <img src="./images/avatar/patrik.jpg" data-title="Patrik N" data-content="Creator of the API" class="ui avatar image">
-                        <br></br>
-                        </a>
+                    <div class="ui container">
+                        <div class="ui vertical text menu">
+                            <div class="header item">Importand Infos</div>
+                            <a class="item">
+                                API
+                            </a>
+                            <a class="item">
+                                Where did we get the data from?
+                            </a>
+                            <a>
+                                <img src="./images/avatar/leon.png" data-title="Leon Kie"
+                                    data-content="Creator of the Visualization on this site" class="ui avatar image">
+                                <img src="./images/avatar/patrik.jpg" data-title="Patrik N"
+                                    data-content="Creator of the API" class="ui avatar image">
+                                <br></br>
+                            </a>
 
-                        <a>
-                            <div class="ui fluid animated fade button" tabindex="0">
-                                <div class="visible content">
-                                    <i class="coffee icon"></i>
+                            <a>
+                                <div class="ui fluid animated fade button" tabindex="0">
+                                    <div class="visible content">
+                                        <i class="coffee icon"></i>
+                                    </div>
+                                    <div class="hidden content">
+                                        Buy us a Coffee
+                                    </div>
                                 </div>
-                                <div class="hidden content">
-                                    Buy us a Coffee
-                                </div>
-                            </div>
 
-                        </a>
-                      </div>
-                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <!-- <div class="ui right rail">
                
                 </div> -->
-    
-        
 
 
-        <div id="bubblechart"></div>
-        
-        <div id="chartdiv"></div>
-        <div class="ui stackable centered grid ">
-        <div class="two wide column">
-            <div class="ui fluid animated button" tabindex="0">
-                <div class="visible content">Previous</div>
-                <div class="hidden content">
-                <i class="left arrow icon"></i>
+
+
+                <div id="bubblechart"></div>
+
+                <div class="ui center aligned tree equal width grid ">
+                    <div class="column">
+                        <div class="ui fluid centered animated button" id="pre" tabindex="0">
+                            <div class="visible content">Previous</div>
+                            <div class="hidden content">
+                                <i class="left arrow icon"></i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="column">
+                        <div class="ui mini statistic">
+                            <div class="value" id="cw">
+                                
+                            </div>
+                            <div class="label">
+                                calendar week
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="ui fluid animated button" id="next" tabindex="0">
+                            <div class="visible content">Next</div>
+                            <div class="hidden content">
+                                <i class="right arrow icon"></i>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </div>         
-        </div>
 
-        <div class="ui mini statistic">
-            <div class="value">
-              12
             </div>
-            <div class="label">
-                calendar week
-            </div>
-          </div>
-
-        <div class="two wide column">
-        <div class="ui fluid animated button" tabindex="0">
-            <div class="visible content">Next</div>
-                <div class="hidden content">
-                <i class="right arrow icon"></i>
-                </div>
-        </div>
-        </div>
-        </div>
-
-        </div>
         </div>
 
         <h4 class="ui horizontal divider header">
@@ -134,12 +140,58 @@
             <div class="bar"></div>
             <div class="label">Current Occupancie</div>
         </div>
+
+        <br>
+
+        <h4 class="ui grid horizontal divider header mobile only">
+            Infos
+        </h4>
+
+        <br>
+
+
+
+        <div class="ui fluid wide container grid mobile only">
+            <div class="ui fluid vertical text menu">
+                <div class="header item">Importand Infos</div>
+                <a class="item">
+                    API
+                </a>
+                <a class="item">
+                    Where did we get the data from?
+                </a>
+                <a>
+                    <img src="./images/avatar/leon.png" data-title="Leon Kie"
+                        data-content="Creator of the Visualization on this site" class="ui avatar image">
+                    <img src="./images/avatar/patrik.jpg" data-title="Patrik N" data-content="Creator of the API"
+                        class="ui avatar image">
+                    <br></br>
+                </a>
+
+                <a>
+                    <div class="ui fluid animated fade button" tabindex="0">
+                        <div class="visible content">
+                            <i class="coffee icon"></i>
+                        </div>
+                        <div class="hidden content">
+                            Buy us a Coffee
+                        </div>
+                    </div>
+
+                </a>
+                <br>
+            </div>
+
+        </div>
+
+
     </div>
 
-    
 
-    <script  type="module" src="readData.js"></script>
-    <script  type="module" src="bubblechart.js"></script>
-   
+
+    <script type="module" src="readData.js"></script>
+    <script type="module" src="bubblechart.js"></script>
+
 </body>
+
 </html>
