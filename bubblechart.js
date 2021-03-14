@@ -104,10 +104,10 @@ am4core.ready(async function () {
   // Data import get correctly formated Data
   async function getformatedData(location) {
     const weekdays = ["Son", "Mon", "The", "Wed", "Thu", "Fr", "Sa"];
-    const start = new Date(new Date("10-24-2020 10:00").toLocaleString("en-us", {
+    const start = new Date(new Date("10 24 2020 10:00").toLocaleString("en-us", {
       timeZone: "Europe/Berlin"
     }))
-    const end = new Date(new Date("11-01-2020 10:00").toLocaleString("en-us", {
+    const end = new Date(new Date("11 01 2020 10:00").toLocaleString("en-us", {
       timeZone: "Europe/Berlin"
     }))
     const loc = location
