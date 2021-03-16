@@ -29,7 +29,7 @@ am4core.ready(async function () {
   $("#pre").on("click", async function () {
 
     //console.log("previouse Clicked")
-    cw = Math.max(cw-1,1)
+    cw = Math.max(cw - 1, 1)
     $('#cw').text(String(cw))
     if (currentlySeclected != "") {
       data = await getformatedData(currentlySeclected);
@@ -38,23 +38,23 @@ am4core.ready(async function () {
   });
 
 
-  $("#coffee").on("click",function(){
+  $("#coffee").on("click", function () {
     //console.log("Test")
-    window.location.href="https://www.buymeacoffee.com/occupancy";
+    window.location.href = "https://www.buymeacoffee.com/occupancy";
 
   });
 
   $("#next").on("click", async function () {
-    cw = Math.min(cw+1,52)
+    cw = Math.min(cw + 1, 52)
     $('#cw').text(String(cw))
     //console.log("next Clicked")
 
   });
 
-  $('.ui.dropdown')
-    .dropdown({
-      values: false
-    });
+  //$('.ui.dropdown')
+  //  .dropdown({
+  //    values: false
+  //  });
 
   const locations_path = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/location-index/data/locations.json"
   fetch(locations_path)
@@ -70,19 +70,64 @@ am4core.ready(async function () {
       });
 
       dropdown_elts[0].selected = true;
-      console.log("Data:", dropdown_elts[0])
+      //console.log("Data:", dropdown_elts[0])
       currentlySeclected = dropdown_elts[0]["value"]
-      console.log("Data:", dropdown_elts)
+      //console.log("Data:", dropdown_elts)
       $('.ui.dropdown')
         .dropdown({
           values: dropdown_elts,
+          selectOnBlur:false,
           onChange: async function (val) {
             console.log("Value Secected:", val)
             currentlySeclected = val
             if (val != "") {
-              data = await getformatedData(val);
-              chart.data = data
+              const data_element = await getformatedData(val);
+              chart.data = data_element
             }
+            
+            console.log("Loading Dropdown")
+            console.log("Filter:",data[val])
+            const setupMaps = function() {
+            var setting = {
+              "height": 257,
+              "width": 523,
+              "zoom": 17,
+              "queryString": "Test",
+              "place_id": "",
+              "satellite": false,
+              "centerCoord": [],
+              "cid": data[val].cid,
+              "lang": "de",
+              "id": "map-9cd199b9cc5410cd3b1ad21cab2e54d3",
+              "embed_id": "428535"
+            };
+
+            
+            var d = document;
+            var to = d.getElementById('map-9cd199b9cc5410cd3b1ad21cab2e54d3');
+            var s = d.createElement('script');
+            var header = d.getElementById('maps-header')
+            header.innerHTML=data[val].name
+            s.id = "maps"
+            s.src = 'https://1map.com/js/script-for-user.js?embed_id=428535';
+            s.async = true;
+            s.onload = function (e) {
+              to.innerHTML = "";
+              window.OneMap.initMap(setting)
+            };
+
+            
+
+            //to.parentNode.Child(s, to);
+            console.log(s)
+            console.log(to)
+            
+            to.appendChild(s)
+
+            console.log(to)
+          }
+
+          setupMaps();
           }
         });
     })
