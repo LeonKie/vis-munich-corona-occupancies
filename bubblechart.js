@@ -96,7 +96,7 @@ am4core.ready(async function () {
               "place_id": "",
               "satellite": false,
               "centerCoord": [],
-              "cid": data[val].cid,
+              "cid": data[val]["cid"],
               "lang": "de",
               "id": "map-9cd199b9cc5410cd3b1ad21cab2e54d3",
               "embed_id": "428535"
