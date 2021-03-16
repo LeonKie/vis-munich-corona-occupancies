@@ -28,21 +28,28 @@ am4core.ready(async function () {
 
   $("#pre").on("click", async function () {
 
-    console.log("previouse Clicked")
+    //console.log("previouse Clicked")
     cw = Math.max(cw-1,1)
     $('#cw').text(String(cw))
     if (currentlySeclected != "") {
       data = await getformatedData(currentlySeclected);
       chart.data = data
     }
-  })
+  });
+
+
+  $("#coffee").on("click",function(){
+    //console.log("Test")
+    window.location.href="https://www.buymeacoffee.com/occupancy";
+
+  });
 
   $("#next").on("click", async function () {
     cw = Math.min(cw+1,52)
     $('#cw').text(String(cw))
-    console.log("next Clicked")
+    //console.log("next Clicked")
 
-  })
+  });
 
   $('.ui.dropdown')
     .dropdown({
