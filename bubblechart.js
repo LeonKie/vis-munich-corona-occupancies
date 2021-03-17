@@ -32,8 +32,8 @@ am4core.ready(async function () {
     cw = Math.max(cw - 1, 1)
     $('#cw').text(String(cw))
     if (currentlySeclected != "") {
-      data = await getformatedData(currentlySeclected);
-      chart.data = data
+      const data_element = await getformatedData(currentlySeclected);
+      chart.data = data_element
     }
   });
 
