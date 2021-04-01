@@ -4,7 +4,7 @@ This is a Visualization of the Occupancies in Munich.
 
 [Website](https://me.kiesgen.eu/vis-munich-corona-occupancies/)
 
-![bubblePreview](bubblePreview.png)
+![bubblePreview](https://raw.githubusercontent.com/LeonKie/vis-munich-corona-occupancies/main/bubblePreview.PNG)
 
 ----
 ## Api
