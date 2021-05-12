@@ -4,9 +4,15 @@ import LineChart from 'metrics-graphics'
 const canvas = document.getElementById('Occ').getContext("2d");
 
 
+
 chartIt()
 
-async function getformatedData(){
+async function getformatedData(start,end){
+
+    //const week_cw =parseInt(document.getElementById("cw").innerHTML)
+    //console.log("Current Week: ",week_cw)
+    //n1 , n2 = getfist_last_of_week(2021,week_cw)
+    console.log(n1,n2)
     const start = new Date(new Date("10-30-2020 10:00").toLocaleString("en-us", {timeZone: "Europe/Berlin"}))
     const end =new Date(new Date("11-01-2020 10:00").toLocaleString("en-us", {timeZone: "Europe/Berlin"}))
     const loc="b_ei"

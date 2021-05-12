@@ -1,6 +1,20 @@
 import {
   getData
 } from "./readData.js"
+
+
+
+function getfist_last_of_week(year,week){
+  const firstDay = new Date(2015, 0, 1).getDay();
+  var d = new Date("Jan 01 " + year + " 01:00:00");
+  //console.log("Start Date of the Year ", d)
+  var w = d.getTime() - (3600000 * 24 * (firstDay - 0)) + 604800000 * (week)
+  var n1 = new Date(w);
+  var n2 = new Date(w + 518400000)
+  return [n1,n2]
+}
+
+
 am4core.ready(async function () {
 
   Date.prototype.getWeekNumber = function () {
@@ -14,7 +28,6 @@ am4core.ready(async function () {
 
   let cw = new Date().getWeekNumber()
   $('#cw').text(String(cw))
-
 
   console.log(cw)
   let currentlySeclected = ""
@@ -31,8 +44,11 @@ am4core.ready(async function () {
     //console.log("previouse Clicked")
     cw = Math.max(cw - 1, 1)
     $('#cw').text(String(cw))
+
+    const [s,e]=getfist_last_of_week("2021",cw)
+    console.log("Start,end: ", s,e)
     if (currentlySeclected != "") {
-      const data_element = await getformatedData(currentlySeclected);
+      const data_element = await getformatedData(currentlySeclected,s,e);
       chart.data = data_element
     }
   });
@@ -47,6 +63,12 @@ am4core.ready(async function () {
   $("#next").on("click", async function () {
     cw = Math.min(cw + 1, 52)
     $('#cw').text(String(cw))
+    const [s,e]=getfist_last_of_week("2021",cw)
+    console.log("Start,end: ", s,e)
+    if (currentlySeclected != "") {
+      const data_element = await getformatedData(currentlySeclected,s,e);
+      chart.data = data_element
+    }
     //console.log("next Clicked")
 
   });
@@ -69,6 +91,12 @@ am4core.ready(async function () {
         }
       });
 
+      const cw = parseInt($('#cw').text())
+      console.log("Current Week: ",cw)
+
+      const [s,e]  = getfist_last_of_week("2021",cw)
+
+      //console.log(s,e)
       dropdown_elts[0].selected = true;
       //console.log("Data:", dropdown_elts[0])
       currentlySeclected = dropdown_elts[0]["value"]
@@ -79,9 +107,13 @@ am4core.ready(async function () {
           selectOnBlur:false,
           onChange: async function (val) {
             console.log("Value Secected:", val)
+            const cw = parseInt($('#cw').text())
+            console.log("Current Week: ",cw)
+            const [s,e]  = getfist_last_of_week("2021",cw)
+
             currentlySeclected = val
             if (val != "") {
-              const data_element = await getformatedData(val);
+              const data_element = await getformatedData(val,s,e);
               chart.data = data_element
             }
             
@@ -154,14 +186,14 @@ am4core.ready(async function () {
 
 
   // Data import get correctly formated Data
-  async function getformatedData(location) {
+  async function getformatedData(location,start,end) {
     const weekdays = ["Son", "Mon", "The", "Wed", "Thu", "Fr", "Sa"];
-    const start = new Date(new Date("10 24 2020 10:00").toLocaleString("en-us", {
-      timeZone: "Europe/Berlin"
-    }))
-    const end = new Date(new Date("11 01 2020 10:00").toLocaleString("en-us", {
-      timeZone: "Europe/Berlin"
-    }))
+    //const start = new Date(start_date.toLocaleString("en-us", {
+    //  timeZone: "Europe/Berlin"
+    //}))
+    //const end = new Date(end_date.toLocaleString("en-us", {
+    //  timeZone: "Europe/Berlin"
+    //}))
     const loc = location
 
 
