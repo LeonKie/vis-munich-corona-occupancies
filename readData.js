@@ -1,5 +1,5 @@
 
-const url = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/location-index/data"
+const url = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/main/data/"
 
 let getDaysArray = function(start, end) {
     for(var arr=[],dt=new Date(start); dt<=end; dt.setDate(dt.getDate()+1)){
