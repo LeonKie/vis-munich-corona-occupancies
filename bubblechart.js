@@ -60,6 +60,8 @@ am4core.ready(async function () {
 
   });
 
+  //$('#standard_calendar').calendar();
+
   $("#next").on("click", async function () {
     cw = Math.min(cw + 1, 52)
     $('#cw').text(String(cw))
@@ -73,10 +75,8 @@ am4core.ready(async function () {
 
   });
 
-  //$('.ui.dropdown')
-  //  .dropdown({
-  //    values: false
-  //  });
+  $('#year-dropdown')
+    .dropdown();
 
   const locations_path = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/location-index/data/locations.json"
   fetch(locations_path)
@@ -101,7 +101,7 @@ am4core.ready(async function () {
       //console.log("Data:", dropdown_elts[0])
       currentlySeclected = dropdown_elts[0]["value"]
       //console.log("Data:", dropdown_elts)
-      $('.ui.dropdown')
+      $('#location-dropdown')
         .dropdown({
           values: dropdown_elts,
           selectOnBlur:false,

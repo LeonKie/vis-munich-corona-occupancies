@@ -15,6 +15,13 @@
         #rails {
             display: none !important;
         }
+
+        input[type=date]:required:invalid::-webkit-datetime-edit {
+            color: transparent;
+        }
+        input[type=date]:focus::-webkit-datetime-edit {
+            color: black !important;
+        }
 }
     </style>
 
@@ -28,6 +35,8 @@
         src="https://gist.githubusercontent.com/bl4ck5un/ed27db3d653011b32ee0877058abac7d/raw/d7c46a3880d94cbc3f344bb160620dbd1cb17f2b/responsive-semantic-ui.css">
     </script>
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+
+
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="semantic/dist/semantic.min.js"></script>
@@ -50,7 +59,7 @@
         <p>The chart shows the occupancies of different Locations in Munich. This is helpfull if you want to find a the
             best timeslot without having to wait. </p>
 
-        <select class="ui fluid search selection dropdown">
+        <select class="ui fluid search selection dropdown" id="location-dropdown">
             <i class="dropdown icon"></i>
         </select>
 
@@ -140,6 +149,7 @@
 
 
                     <div class="column">
+                        
                         <div class="ui mini statistic">
                             <div class="value" id="cw">
 
@@ -147,6 +157,12 @@
                             <div class="label">
                                 calendar week
                             </div>
+                            <div>
+                            <!--<select class="ui search dropdown" id="year-dropdown">
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                            </select>-->
+                        </div>
                         </div>
                     </div>
 
