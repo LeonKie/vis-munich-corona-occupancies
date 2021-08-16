@@ -78,7 +78,7 @@ am4core.ready(async function () {
   $('#year-dropdown')
     .dropdown();
 
-  const locations_path = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/location-index/data/locations.json"
+  const locations_path = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/main/data/locations.json"
   fetch(locations_path)
     .then(res => res.json())
     .then(data => {
@@ -201,8 +201,10 @@ am4core.ready(async function () {
     //console.log(datapoints)
     //format Data to correct object
     const data_percent = datapoints.map(elt => {
+
+      //console.log(elt)
       return {
-        x: new Date(elt.timestamp),
+        x: new Date(elt.timestamp.slice(0,-1)),
         y: elt.percent
       }
     })
@@ -223,6 +225,8 @@ am4core.ready(async function () {
       }
     });
 
+    console.log(data_bubble)
+
     const data = []
 
     weekdays.push(weekdays.shift())
@@ -231,7 +235,7 @@ am4core.ready(async function () {
 
       const data_day_filered = data_bubble.filter(elt => elt.weekday == w)
       hours.forEach(h => {
-
+        if (data_day_filered.length > 0) {
         const result = data_day_filered.filter(elt => elt.hour == h)
         //console.log(result)
         if (result.length > 0) {
@@ -240,7 +244,15 @@ am4core.ready(async function () {
             weekday: w,
             value: result.reduce((i, a) => i + a.value, 0) / result.length
           })
+        }else {
+          data.push({
+            hour: h,
+            weekday: w,
+            value: 0
+          })
+
         }
+      }
 
       })
     })
@@ -296,7 +308,8 @@ am4core.ready(async function () {
     property: "radius",
     target: bullet,
     min: 2,
-    max: bubble_size
+    max: bubble_size,
+    maxValue : 100
   });
 
   series.heatRules.push({
