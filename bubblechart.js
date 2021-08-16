@@ -78,7 +78,7 @@ am4core.ready(async function () {
   $('#year-dropdown')
     .dropdown();
 
-  const locations_path = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/location-index/data/locations.json"
+  const locations_path = "https://raw.githubusercontent.com/zepatrik/munich-corona-occupancies/main/data/locations.json"
   fetch(locations_path)
     .then(res => res.json())
     .then(data => {
@@ -197,7 +197,7 @@ am4core.ready(async function () {
     const loc = location
 
 
-    const datapoints = await getData("bwo", start, end)
+    const datapoints = await getData(loc, start, end)
     //console.log(datapoints)
     //format Data to correct object
     const data_percent = datapoints.map(elt => {
@@ -308,7 +308,8 @@ am4core.ready(async function () {
     property: "radius",
     target: bullet,
     min: 2,
-    max: bubble_size
+    max: bubble_size,
+    maxValue : 100
   });
 
   series.heatRules.push({
