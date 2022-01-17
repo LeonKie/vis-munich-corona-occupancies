@@ -5,10 +5,10 @@ import {
 
 
 function getfist_last_of_week(year,week){
-  const firstDay = new Date(2015, 0, 1).getDay();
+  const firstDay = new Date(year, 0, 1).getDay();
   var d = new Date("Jan 01 " + year + " 01:00:00");
   //console.log("Start Date of the Year ", d)
-  var w = d.getTime() - (3600000 * 24 * (firstDay - 0)) + 604800000 * (week)
+  var w = d.getTime() - (3600000 * 24 * (firstDay - 1 )) + 604800000 * (week)
   var n1 = new Date(w);
   var n2 = new Date(w + 518400000)
   return [n1,n2]
@@ -27,6 +27,7 @@ am4core.ready(async function () {
 
 
   let cw = new Date().getWeekNumber()
+  let year = new Date().getFullYear()
   $('#cw').text(String(cw))
 
   console.log(cw)
@@ -42,11 +43,19 @@ am4core.ready(async function () {
   $("#pre").on("click", async function () {
 
     //console.log("previouse Clicked")
-    cw = Math.max(cw - 1, 1)
+    let cw_new = cw - 1
+    if (cw_new < 1) {
+      cw_new = 52
+      year = year - 1
+    }else if (cw_new > 52){
+      cw_new = 1
+      year = year + 1
+    }
+    cw = cw_new
     $('#cw').text(String(cw))
-
-    const [s,e]=getfist_last_of_week("2021",cw)
-    console.log("Start,end: ", s,e)
+    
+    const [s,e]=getfist_last_of_week(year,cw)
+    console.log("Start,end: ", s,e,year)
     if (currentlySeclected != "") {
       const data_element = await getformatedData(currentlySeclected,s,e);
       chart.data = data_element
@@ -63,9 +72,17 @@ am4core.ready(async function () {
   //$('#standard_calendar').calendar();
 
   $("#next").on("click", async function () {
-    cw = Math.min(cw + 1, 52)
+    let cw_new = cw + 1
+    if (cw_new < 1) {
+      cw_new = 52
+      year = year - 1
+    }else if (cw_new > 52){
+      cw_new = 1
+      year = year + 1
+    }
+    cw = cw_new
     $('#cw').text(String(cw))
-    const [s,e]=getfist_last_of_week("2021",cw)
+    const [s,e]=getfist_last_of_week(year,cw)
     console.log("Start,end: ", s,e)
     if (currentlySeclected != "") {
       const data_element = await getformatedData(currentlySeclected,s,e);
@@ -94,7 +111,7 @@ am4core.ready(async function () {
       const cw = parseInt($('#cw').text())
       console.log("Current Week: ",cw)
 
-      const [s,e]  = getfist_last_of_week("2021",cw)
+      const [s,e]  = getfist_last_of_week(year,cw)
 
       //console.log(s,e)
       dropdown_elts[0].selected = true;
@@ -109,7 +126,7 @@ am4core.ready(async function () {
             console.log("Value Secected:", val)
             const cw = parseInt($('#cw').text())
             console.log("Current Week: ",cw)
-            const [s,e]  = getfist_last_of_week("2021",cw)
+            const [s,e]  = getfist_last_of_week(year,cw)
 
             currentlySeclected = val
             if (val != "") {
