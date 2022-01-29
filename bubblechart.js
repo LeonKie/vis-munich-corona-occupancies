@@ -4,6 +4,25 @@ import {
 
 
 
+async function updateCurrentOcc(val){
+  //console.log("currentloc",val)
+  const laterdate = new Date();
+  laterdate.setDate(laterdate.getDate()-1)
+  const today_data = await getData(val,laterdate)
+  //console.log("here current occ", today_data.pop().percent)
+  $('#occ1').progress({
+    percent: today_data.pop().percent,
+    text: {
+      active : 'Current Occupancy',
+      success: 'Current Occupancy'
+    }
+  });
+}
+
+
+
+
+
 function getfist_last_of_week(year,week){
   const firstDay = new Date(year, 0, 1).getDay();
   var d = new Date("Jan 01 " + year + " 01:00:00");
@@ -30,10 +49,10 @@ am4core.ready(async function () {
   let year = new Date().getFullYear()
   $('#cw').text(String(cw))
 
-  console.log(cw)
+  //console.log(cw)
   let currentlySeclected = ""
   const bubble_size = Math.max(($('#bubblechart').width() - 500) / (1100 - 500) * 20 + 10, 10)
-  console.log("Widh", bubble_size)
+  //console.log("Widh", bubble_size)
 
   $('.avatar.image')
     .popup({
@@ -83,7 +102,7 @@ am4core.ready(async function () {
     cw = cw_new
     $('#cw').text(String(cw))
     const [s,e]=getfist_last_of_week(year,cw)
-    console.log("Start,end: ", s,e)
+    //console.log("Start,end: ", s,e)
     if (currentlySeclected != "") {
       const data_element = await getformatedData(currentlySeclected,s,e);
       chart.data = data_element
@@ -126,6 +145,24 @@ am4core.ready(async function () {
             console.log("Value Secected:", val)
             const cw = parseInt($('#cw').text())
             console.log("Current Week: ",cw)
+            /*const laterdate = new Date();
+            laterdate.setDate(laterdate.getDate()-1)
+            let today_data = await getData(val,laterdate)
+            console.log("here current occ", today_data.pop().percent)
+            $('#occ1').progress({
+              percent: today_data.pop().percent
+            });*/
+            await updateCurrentOcc(val)
+
+            
+            	
+            $( '#vis' ).on( "mouseleave",async function(){
+              await updateCurrentOcc(val)
+            } );
+
+
+            
+
             const [s,e]  = getfist_last_of_week(year,cw)
 
             currentlySeclected = val
@@ -275,7 +312,7 @@ am4core.ready(async function () {
     })
 
 
-    console.log(data)
+    //console.log(data)
 
     return data
   };
@@ -317,9 +354,22 @@ am4core.ready(async function () {
   bullet.stroke = am4core.color("#ffffff");
   bullet.strokeOpacity = 0;
 
+  
   bullet.adapter.add("tooltipY", function (tooltipY, target) {
+    
+    $('#occ1').progress({
+      percent: target.dataItem.value,
+      text: {
+        active : 'Selected Occupancy',
+        success: 'Selected Occupancy'
+      }
+    });
+
+
+    //console.log(target.radius)
     return -target.radius + 1;
   })
+
 
   series.heatRules.push({
     property: "radius",
