@@ -3,6 +3,8 @@ import {
 } from "./readData.js"
 
 
+const trusted_location=["b_bw_ost","b_bw_sued","b_bw_west","s_cosi","s_dante","s_micha","s_nord","s_prinz","s_sued","s_west","s_volk","s_cosima","b_forst","b_gies","b_michaeli","b_nord","b_oly","b_sued","b_volk","b_west"]
+
 
 async function updateCurrentOcc(val){
   //console.log("currentloc",val)
@@ -121,8 +123,9 @@ am4core.ready(async function () {
 
       console.log(data)
       const dropdown_elts = Object.keys(data).map(elt => {
+        const certificate= trusted_location.includes(elt) ?  '<img src="trusted-icon-3.png" alt="Trusted Data"></img>': ''
         return {
-          name: data[elt].name,
+          name: data[elt].name + certificate,
           value: elt
         }
       });
